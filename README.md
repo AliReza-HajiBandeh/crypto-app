@@ -57,7 +57,7 @@ To run the CryptoMarket App locally, follow these steps:
 4. Create a `.env` file in the project root directory and add your Coinmarketcap API key.
 
    ```env
-   REACT_APP_API_KEY=YOUR_API_KEY
+   APP_API_KEY=YOUR_API_KEY
    ```
 
 5. Start the development server.
