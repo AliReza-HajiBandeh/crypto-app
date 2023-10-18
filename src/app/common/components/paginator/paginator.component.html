@@ -1,0 +1,17 @@
+<span>
+    <button [disabled]="page === 1 || disabled" (click)="pageChange.emit(1)" type="button">FIRST</button>
+    <button [disabled]="page < 2 || disabled" (click)="pageChange.emit(page - 1)" type="button">PREV</button>
+    <span>{{page | pageRange : size : total}}</span>
+    <button [disabled]="page === (total | pageCount : size) || disabled" (click)="pageChange.emit(page + 1)"
+            type="button">NEXT</button>
+    <button [disabled]="page === (total | pageCount : size) || disabled"
+            (click)="lastPage()" type="button">LAST</button>
+</span>
+<span>
+    <select name="size" [disabled]="disabled" [(ngModel)]="size"
+            (ngModelChange)="sizeChange.emit(+$event); pageChange.emit(page = 1)">
+        <option [value]="5">5</option>
+        <option [value]="10">10</option>
+        <option [value]="25">25</option>
+    </select>
+</span>

@@ -1,0 +1,34 @@
+$g-unit: 1rem;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  font-family: Calibri, sans-serif;
+}
+
+body {
+  direction: ltr;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: darkgray;
+}
+
+main {
+  max-width: 1008px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: lightgray;
+  padding: $g-unit;
+}
+
+table {
+  th, td {
+    text-align: left;
+    padding: $g-unit / 2;
+  }
+}

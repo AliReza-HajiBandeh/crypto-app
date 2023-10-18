@@ -1,0 +1,49 @@
+<div>
+    <form #form='ngForm'>
+        <div>Sort Buttons:</div>
+        <app-switch *ngFor="let param of sortParams; let i = index" name="{{param.sort}}" [cases]="sortDirs"
+        [(ngModel)]="param.sort_dir" (ngModelChange)="onSortSelect(i)"></app-switch>
+        <br>
+        <br>
+       <button type="submit" (click)="findPaging()">Search</button>
+    </form>
+</div>
+<div>
+    <table style="width: 100%">
+        <caption *ngIf="cryptoList?.length">
+            <app-paginator [total]="total" [(page)]="paginator.start" [(size)]="paginator.limit"
+            (sizeChange)="findPaging(true)" (pageChange)="findPaging(true)"></app-paginator>
+        </caption>
+        <thead>
+        <tr *ngIf="cryptoList?.length">
+            <th></th>
+            <th><input type="search" name="name" [(ngModel)]="filters.name"></th>
+            <th><input type="search" name="symbol" [(ngModel)]="filters.symbol"></th>
+            <th colspan="2"></th>
+        </tr>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>Percent Change <small>24h</small></th>
+            <th>Market Cap</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="cryptoList?.length; else emptyRow">
+            <tr  *ngFor="let crypto of cryptoList; let i = index" [hidden]="notMatch('symbol', i) || notMatch('name', i)">
+                <td>{{i | index : paginator.start : paginator.limit}}</td>
+                <td>{{crypto.name}}</td>
+                <td>{{crypto.symbol}}</td>
+                <td>{{crypto.quote.USD.price | currency : 'UTC'}}</td>
+                <td>{{crypto.quote.USD.percent_change_24h}}</td>
+                <td>{{crypto.quote.USD.market_cap}}</td>
+            </tr>
+        </tbody>
+        <ng-template #emptyRow>
+            <tr>
+                <td colspan="6" style="text-align: center">No Data!</td>
+            </tr>
+        </ng-template>
+    </table>
+</div>
